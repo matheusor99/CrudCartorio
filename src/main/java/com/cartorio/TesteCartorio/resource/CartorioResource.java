@@ -18,13 +18,18 @@ import org.springframework.web.servlet.ModelAndView;
 import com.cartorio.TesteCartorio.domain.Cartorio;
 import com.cartorio.TesteCartorio.service.CartorioService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 @RestController
+@Api(value="Api Cartorio")
 public class CartorioResource {
 	
 	@Autowired
 	private CartorioService cartorioService;
 	
 	@PostMapping("/register")
+	@ApiOperation(value="Cria um novo Cartorio")
 	public ResponseEntity<String> register(@RequestBody Cartorio cartorio) {
 		String result; 
 		try {
@@ -37,6 +42,7 @@ public class CartorioResource {
 	}
 	
 	@PutMapping("/update")
+	@ApiOperation(value="Atualiza um Cartorio")
 	public ResponseEntity<String> update(@RequestBody Cartorio cartorio) { 
 		String result;
 		try {
@@ -49,6 +55,7 @@ public class CartorioResource {
 	}
 	
 	@DeleteMapping("/delete/{id}")
+	@ApiOperation(value="Deleta um Cartorio")
 	public ResponseEntity<String> delete(@PathVariable("id") Long id) {
 		String result;
 		try {
@@ -61,6 +68,7 @@ public class CartorioResource {
 	}
 	
 	@GetMapping("/search/{id}")
+	@ApiOperation(value="retorna um Cartorio")
 	public ResponseEntity<Cartorio> searchCartorio(@PathVariable("id") Long id) {
 		Cartorio result;
 		result = cartorioService.searchCartorio(id);
@@ -68,6 +76,7 @@ public class CartorioResource {
 	}
 	
 	@GetMapping("/searchAll")
+	@ApiOperation(value="Cria uma Lista de Cartorios")
 	public ResponseEntity<List<Cartorio>> searchAllCartorio() {
 		List<Cartorio> result;
 		result = cartorioService.searchAllCartorio();
